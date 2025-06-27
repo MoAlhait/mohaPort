@@ -113,11 +113,22 @@ export default function Home() {
               {portfolioData.personal.title}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="btn-accent flex items-center justify-center gap-2">
+              <a 
+                href="/resume.pdf" 
+                download
+                className="btn-accent flex items-center justify-center gap-2"
+              >
                 <Download size={20} />
                 Download Resume
-              </button>
-              <button className="btn-secondary flex items-center justify-center gap-2">
+              </a>
+              <button 
+                onClick={() => {
+                  document.getElementById('contact')?.scrollIntoView({ 
+                    behavior: 'smooth' 
+                  });
+                }}
+                className="btn-secondary flex items-center justify-center gap-2"
+              >
                 <Mail size={20} />
                 Get In Touch
               </button>
@@ -320,8 +331,33 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="flex gap-4">
-                  <motion.a href={project.link} className={`text-sm ${index === 1 ? 'btn-accent' : 'btn-primary'}`} whileHover={{ scale: 1.08, boxShadow: '0 0 16px #3B82F6' }}>Live Demo</motion.a>
-                  <motion.a href={project.github} className="btn-secondary text-sm" whileHover={{ scale: 1.08, boxShadow: '0 0 16px #3B82F6' }}>View Code</motion.a>
+                  {project.link !== "#" && (
+                    <motion.a 
+                      href={project.link} 
+                      className={`text-sm ${index === 1 ? 'btn-accent' : 'btn-primary'}`} 
+                      whileHover={{ scale: 1.08, boxShadow: '0 0 16px #3B82F6' }}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Live Demo
+                    </motion.a>
+                  )}
+                  {project.github !== "#" && (
+                    <motion.a 
+                      href={project.github} 
+                      className="btn-secondary text-sm" 
+                      whileHover={{ scale: 1.08, boxShadow: '0 0 16px #3B82F6' }}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Code
+                    </motion.a>
+                  )}
+                  {(project.link === "#" && project.github === "#") && (
+                    <span className="text-sm text-gray-500 dark:text-gray-400 italic">
+                      Demo & code coming soon
+                    </span>
+                  )}
                 </div>
               </motion.div>
             ))}
