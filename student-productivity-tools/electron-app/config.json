@@ -1,0 +1,23 @@
+{
+  "app": {
+    "name": "Focus Lock Desktop",
+    "version": "1.0.0",
+    "autoStart": false,
+    "minimizeToTray": true
+  },
+  "blocking": {
+    "enabled": true,
+    "strictMode": false,
+    "emergencyTimeout": 300
+  },
+  "scheduling": {
+    "enabled": true,
+    "defaultDuration": 25,
+    "breakDuration": 5
+  },
+  "notifications": {
+    "enabled": true,
+    "soundEnabled": true,
+    "breakReminders": true
+  }
+}

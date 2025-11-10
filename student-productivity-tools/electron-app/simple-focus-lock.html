@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Focus Lock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+        
+        .status {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .status.active {
+            border-color: #4ade80;
+            background: rgba(74, 222, 128, 0.2);
+        }
+        
+        .status.inactive {
+            border-color: #f87171;
+            background: rgba(248, 113, 113, 0.2);
+        }
+        
+        .status-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .allowed-app {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4ade80;
+            margin: 10px 0;
+        }
+        
+        .app-selector {
+            margin: 30px 0;
+        }
+        
+        .app-selector h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .app-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 15px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .app-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .app-item.selected {
+            border-color: #4ade80;
+            background: rgba(74, 222, 128, 0.3);
+        }
+        
+        .controls {
+            margin-top: 30px;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn.primary {
+            background: #4ade80;
+            border-color: #4ade80;
+            color: #1f2937;
+        }
+        
+        .btn.primary:hover {
+            background: #22c55e;
+            border-color: #22c55e;
+        }
+        
+        .btn.danger {
+            background: #f87171;
+            border-color: #f87171;
+            color: white;
+        }
+        
+        .btn.danger:hover {
+            background: #ef4444;
+            border-color: #ef4444;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .logs {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.8rem;
+            text-align: left;
+        }
+        
+        .log-entry {
+            margin: 2px 0;
+            opacity: 0.8;
+        }
+        
+        .log-entry.success {
+            color: #4ade80;
+        }
+        
+        .log-entry.error {
+            color: #f87171;
+        }
+        
+        .log-entry.info {
+            color: #60a5fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔒 Simple Focus Lock</h1>
+        <p class="subtitle">Choose one app to use, block all others</p>
+        
+        <div id="status" class="status inactive">
+            <div class="status-text">Focus Mode: OFF</div>
+            <div id="allowedApp" class="allowed-app">No app selected</div>
+        </div>
+        
+        <div class="app-selector">
+            <h3>Select Your Allowed App:</h3>
+            <div id="appGrid" class="app-grid">
+                <!-- Apps will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="toggleBtn" class="btn primary" disabled>
+                Start Focus Mode
+            </button>
+            <button id="refreshBtn" class="btn">
+                Refresh Apps
+            </button>
+        </div>
+        
+        <div id="logs" class="logs">
+            <div class="log-entry info">Ready to start focus mode...</div>
+        </div>
+    </div>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+        
+        let isFocusMode = false;
+        let allowedApp = '';
+        let selectedApp = '';
+        
+        // DOM elements
+        const statusDiv = document.getElementById('status');
+        const statusText = statusDiv.querySelector('.status-text');
+        const allowedAppDiv = document.getElementById('allowedApp');
+        const appGrid = document.getElementById('appGrid');
+        const toggleBtn = document.getElementById('toggleBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const logsDiv = document.getElementById('logs');
+        
+        // Initialize
+        async function init() {
+            await loadApps();
+            await updateStatus();
+            addLog('Application initialized', 'info');
+        }
+        
+        // Load available apps
+        async function loadApps() {
+            try {
+                const apps = await ipcRenderer.invoke('get-app-list');
+                renderApps(apps);
+                addLog(`Loaded ${apps.length} apps`, 'success');
+            } catch (error) {
+                addLog(`Failed to load apps: ${error.message}`, 'error');
+            }
+        }
+        
+        // Render apps in grid
+        function renderApps(apps) {
+            appGrid.innerHTML = '';
+            
+            apps.forEach(app => {
+                const appItem = document.createElement('div');
+                appItem.className = 'app-item';
+                appItem.textContent = app;
+                appItem.onclick = () => selectApp(app);
+                appGrid.appendChild(appItem);
+            });
+        }
+        
+        // Select an app
+        async function selectApp(appName) {
+            selectedApp = appName;
+            
+            // Update UI
+            document.querySelectorAll('.app-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('.app-item').forEach(item => {
+                if (item.textContent === appName) {
+                    item.classList.add('selected');
+                }
+            });
+            
+            // Set allowed app
+            try {
+                const result = await ipcRenderer.invoke('set-allowed-app', appName);
+                if (result.success) {
+                    allowedApp = appName;
+                    updateStatus();
+                    addLog(`Selected app: ${appName}`, 'success');
+                }
+            } catch (error) {
+                addLog(`Failed to select app: ${error.message}`, 'error');
+            }
+        }
+        
+        // Update status display
+        async function updateStatus() {
+            try {
+                const status = await ipcRenderer.invoke('get-focus-status');
+                isFocusMode = status.isActive;
+                allowedApp = status.allowedApp;
+                
+                // Update status display
+                if (isFocusMode) {
+                    statusDiv.className = 'status active';
+                    statusText.textContent = 'Focus Mode: ON';
+                    toggleBtn.textContent = 'Stop Focus Mode';
+                    toggleBtn.className = 'btn danger';
+                } else {
+                    statusDiv.className = 'status inactive';
+                    statusText.textContent = 'Focus Mode: OFF';
+                    toggleBtn.textContent = 'Start Focus Mode';
+                    toggleBtn.className = 'btn primary';
+                }
+                
+                if (allowedApp) {
+                    allowedAppDiv.textContent = `Allowed: ${allowedApp}`;
+                    toggleBtn.disabled = false;
+                } else {
+                    allowedAppDiv.textContent = 'No app selected';
+                    toggleBtn.disabled = true;
+                }
+                
+            } catch (error) {
+                addLog(`Failed to update status: ${error.message}`, 'error');
+            }
+        }
+        
+        // Toggle focus mode
+        async function toggleFocusMode() {
+            try {
+                const result = await ipcRenderer.invoke('toggle-focus-mode');
+                isFocusMode = result.isActive;
+                await updateStatus();
+                
+                if (isFocusMode) {
+                    addLog(`Focus mode started - Allowed app: ${allowedApp}`, 'success');
+                } else {
+                    addLog('Focus mode stopped', 'info');
+                }
+            } catch (error) {
+                addLog(`Failed to toggle focus mode: ${error.message}`, 'error');
+            }
+        }
+        
+        // Add log entry
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry ${type}`;
+            logEntry.textContent = `[${timestamp}] ${message}`;
+            
+            logsDiv.appendChild(logEntry);
+            logsDiv.scrollTop = logsDiv.scrollHeight;
+            
+            // Keep only last 20 log entries
+            while (logsDiv.children.length > 20) {
+                logsDiv.removeChild(logsDiv.firstChild);
+            }
+        }
+        
+        // Event listeners
+        toggleBtn.addEventListener('click', toggleFocusMode);
+        refreshBtn.addEventListener('click', loadApps);
+        
+        // Listen for focus mode changes from main process
+        ipcRenderer.on('focus-mode-changed', (event, data) => {
+            isFocusMode = data.isActive;
+            allowedApp = data.allowedApp;
+            updateStatus();
+            
+            if (isFocusMode) {
+                addLog(`Focus mode activated - Allowed app: ${allowedApp}`, 'success');
+            } else {
+                addLog('Focus mode deactivated', 'info');
+            }
+        });
+        
+        // Initialize app
+        init();
+    </script>
+</body>
+</html>

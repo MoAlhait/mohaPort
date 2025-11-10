@@ -1,0 +1,169 @@
+{
+  "distribution": {
+    "github": {
+      "enabled": true,
+      "repo": "mohammad-alhait/focus-lock",
+      "autoRelease": true,
+      "prerelease": false
+    },
+    "githubPages": {
+      "enabled": true,
+      "domain": "focus-lock.github.io",
+      "customDomain": null
+    },
+    "s3": {
+      "enabled": false,
+      "bucket": "focus-lock-downloads",
+      "region": "us-east-1",
+      "cloudfront": {
+        "enabled": false,
+        "distributionId": null
+      }
+    },
+    "firebase": {
+      "enabled": true,
+      "project": "focus-lock-app",
+      "hosting": {
+        "enabled": true,
+        "site": "focus-lock"
+      }
+    },
+    "vercel": {
+      "enabled": false,
+      "project": "focus-lock",
+      "team": null
+    },
+    "netlify": {
+      "enabled": false,
+      "site": "focus-lock",
+      "team": null
+    }
+  },
+  "build": {
+    "platforms": ["win", "mac", "linux"],
+    "architectures": ["x64", "arm64"],
+    "codeSigning": {
+      "windows": {
+        "enabled": false,
+        "certificate": null,
+        "password": null,
+        "timestampServer": "http://timestamp.digicert.com"
+      },
+      "macos": {
+        "enabled": false,
+        "identity": null,
+        "entitlements": null,
+        "gatekeeperAssess": true
+      }
+    },
+    "notarization": {
+      "macos": {
+        "enabled": false,
+        "appleId": null,
+        "appleIdPassword": null,
+        "teamId": null
+      }
+    },
+    "autoUpdate": {
+      "enabled": true,
+      "provider": "github",
+      "updater": {
+        "enabled": true,
+        "checkInterval": 3600000,
+        "downloadUrl": "https://api.github.com/repos/mohammad-alhait/focus-lock/releases/latest"
+      }
+    }
+  },
+  "notification": {
+    "discord": {
+      "enabled": false,
+      "webhook": null,
+      "channel": "#releases"
+    },
+    "slack": {
+      "enabled": false,
+      "webhook": null,
+      "channel": "#releases"
+    },
+    "email": {
+      "enabled": false,
+      "smtp": {
+        "host": null,
+        "port": 587,
+        "secure": false,
+        "auth": {
+          "user": null,
+          "pass": null
+        }
+      },
+      "from": "noreply@focus-lock.app",
+      "to": ["admin@focus-lock.app"]
+    }
+  },
+  "analytics": {
+    "googleAnalytics": {
+      "enabled": false,
+      "trackingId": null
+    },
+    "mixpanel": {
+      "enabled": false,
+      "token": null
+    },
+    "telemetry": {
+      "enabled": true,
+      "collectUsage": true,
+      "collectErrors": true,
+      "collectPerformance": false
+    }
+  },
+  "security": {
+    "encryption": {
+      "enabled": true,
+      "algorithm": "aes-256-gcm",
+      "keyDerivation": "pbkdf2"
+    },
+    "permissions": {
+      "requestAdminOnInstall": true,
+      "requireAdminForBlocking": true,
+      "allowSystemModifications": true
+    }
+  },
+  "features": {
+    "beta": {
+      "enabled": false,
+      "allowBetaFeatures": false,
+      "betaChannel": false
+    },
+    "experimental": {
+      "enabled": false,
+      "allowExperimentalFeatures": false
+    },
+    "telemetry": {
+      "enabled": true,
+      "anonymousUsage": true,
+      "crashReporting": true
+    }
+  },
+  "localization": {
+    "defaultLanguage": "en",
+    "supportedLanguages": ["en", "es", "fr", "de", "zh", "ja"],
+    "autoDetect": true
+  },
+  "performance": {
+    "cache": {
+      "enabled": true,
+      "maxSize": "100MB",
+      "ttl": 86400
+    },
+    "compression": {
+      "enabled": true,
+      "algorithm": "gzip",
+      "level": 6
+    },
+    "optimization": {
+      "enableMinification": true,
+      "enableTreeShaking": true,
+      "enableCodeSplitting": true
+    }
+  }
+}

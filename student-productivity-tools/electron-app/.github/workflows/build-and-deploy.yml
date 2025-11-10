@@ -1,0 +1,351 @@
+name: Build and Deploy Focus Lock
+
+on:
+  push:
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '18'
+  ELECTRON_VERSION: '27'
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          cd student-productivity-tools
+          npm install
+          cd electron-app
+          npm install
+          
+      - name: Run tests
+        run: |
+          cd student-productivity-tools
+          npm run lint
+          npm run build
+          
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: test-results
+          path: |
+            student-productivity-tools/coverage/
+            student-productivity-tools/test-results/
+
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+    needs: test
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          cd student-productivity-tools
+          npm install
+          cd electron-app
+          npm install
+          
+      - name: Build web app
+        run: |
+          cd student-productivity-tools
+          npm run build
+          
+      - name: Build Windows app
+        run: |
+          cd student-productivity-tools/electron-app
+          npm run build-win
+          
+      - name: Upload Windows artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-build
+          path: |
+            student-productivity-tools/electron-app/dist/
+            student-productivity-tools/electron-app/build/
+          retention-days: 30
+
+  build-macos:
+    name: Build macOS
+    runs-on: macos-latest
+    needs: test
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          cd student-productivity-tools
+          npm install
+          cd electron-app
+          npm install
+          
+      - name: Build web app
+        run: |
+          cd student-productivity-tools
+          npm run build
+          
+      - name: Build macOS app
+        run: |
+          cd student-productivity-tools/electron-app
+          npm run build-mac
+          
+      - name: Upload macOS artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-build
+          path: |
+            student-productivity-tools/electron-app/dist/
+            student-productivity-tools/electron-app/build/
+          retention-days: 30
+
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          cd student-productivity-tools
+          npm install
+          cd electron-app
+          npm install
+          
+      - name: Build web app
+        run: |
+          cd student-productivity-tools
+          npm run build
+          
+      - name: Build Linux app
+        run: |
+          cd student-productivity-tools/electron-app
+          npm run build
+          
+      - name: Upload Linux artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-build
+          path: |
+            student-productivity-tools/electron-app/dist/
+            student-productivity-tools/electron-app/build/
+          retention-days: 30
+
+  package-all:
+    name: Package All Platforms
+    runs-on: ubuntu-latest
+    needs: [build-windows, build-macos, build-linux]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          cd student-productivity-tools/electron-app
+          npm install
+          
+      - name: Run packaging script
+        run: |
+          cd student-productivity-tools/electron-app
+          node scripts/build-all.js
+          
+      - name: Upload packaged files
+        uses: actions/upload-artifact@v3
+        with:
+          name: packaged-releases
+          path: |
+            student-productivity-tools/electron-app/dist/
+          retention-days: 90
+
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: package-all
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Download packaged files
+        uses: actions/download-artifact@v3
+        with:
+          name: packaged-releases
+          path: releases
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          
+      - name: Install dependencies
+        run: |
+          cd student-productivity-tools/electron-app
+          npm install
+          
+      - name: Generate release notes
+        id: release_notes
+        run: |
+          cd student-productivity-tools/electron-app
+          node scripts/deploy.js --generate-notes > release-notes.md
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          cat release-notes.md >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          name: Focus Lock ${{ github.ref }}
+          body: ${{ steps.release_notes.outputs.notes }}
+          files: |
+            releases/dist/installers/*
+            releases/dist/packages/*
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-web:
+    name: Deploy Web App
+    runs-on: ubuntu-latest
+    needs: package-all
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Download packaged files
+        uses: actions/download-artifact@v3
+        with:
+          name: packaged-releases
+          path: releases
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          
+      - name: Install dependencies
+        run: |
+          cd student-productivity-tools/electron-app
+          npm install
+          
+      - name: Deploy to GitHub Pages
+        run: |
+          cd student-productivity-tools/electron-app
+          node scripts/deploy.js --github-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Deploy to Firebase
+        run: |
+          cd student-productivity-tools/electron-app
+          node scripts/deploy.js --firebase
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_PROJECT: ${{ secrets.FIREBASE_PROJECT }}
+
+  notify:
+    name: Notify Deployment
+    runs-on: ubuntu-latest
+    needs: [release, deploy-web]
+    if: always() && startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+      - name: Notify Discord
+        if: needs.release.result == 'success'
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        with:
+          args: |
+            🎉 **Focus Lock v${{ github.ref_name }} Released!**
+            
+            ✅ Windows, macOS, and Linux builds available
+            ✅ Web app deployed
+            ✅ All tests passed
+            
+            Download: https://github.com/${{ github.repository }}/releases/tag/${{ github.ref }}
+            
+      - name: Notify Slack
+        if: needs.release.result == 'success'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          text: "Focus Lock v${{ github.ref_name }} successfully deployed!"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+  cleanup:
+    name: Cleanup
+    runs-on: ubuntu-latest
+    needs: [notify]
+    if: always()
+    
+    steps:
+      - name: Delete old artifacts
+        uses: geekyeggo/delete-artifact@v4
+        with:
+          name: |
+            test-results
+            windows-build
+            macos-build
+            linux-build
+            packaged-releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
