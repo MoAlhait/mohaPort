@@ -87,10 +87,18 @@ export const portfolioData: PortfolioData = {
   projects: [
     {
       title: "Cognitive Science Experiments",
-      description: "Designed experiments including a 2D maze game and verbal recall task to study memory and multitasking. Findings showed multitasking reduced memory accuracy by 40% and increased reaction time by 30%. The project became a tool to help my brother improve his focus and rebuild his memory after his brain injury.",
-      tech: ["Experimental Design", "Data Analysis", "Memory Research", "Cognitive Rehabilitation"],
+      description: "Interactive experiments including memory span tests, Stroop effect demonstrations, and visual search tasks. These experiments helped my brother improve his focus and rebuild his memory after his brain injury. Try them yourself!",
+      tech: ["React", "TypeScript", "Next.js", "Cognitive Psychology", "Data Visualization"],
       image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=300&fit=crop",
-      link: "#",
+      link: "https://experiments.mohammad-alhait.com",
+      github: "https://github.com/MoAlhait/cognitive-experiments"
+    },
+    {
+      title: "Photography Portfolio",
+      description: "A curated collection of my photography work, capturing moments and stories through visual storytelling. From landscape photography to candid portraits, explore my creative journey.",
+      tech: ["Photography", "Visual Arts", "Storytelling"],
+      image: "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=500&h=300&fit=crop",
+      link: "#photography",
       github: "#"
     }
   ],

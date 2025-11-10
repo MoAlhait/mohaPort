@@ -51,6 +51,7 @@ export default function Header({ className = '' }: HeaderProps) {
     { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
     { href: '#projects', label: 'Projects' },
+    { href: 'https://experiments.mohammad-alhait.com', label: 'Experiments', external: true },
     { href: '#contact', label: 'Contact' },
   ]
 
@@ -75,6 +76,7 @@ export default function Header({ className = '' }: HeaderProps) {
                 key={item.href}
                 href={item.href}
                 className="text-gray-600 dark:text-gray-300 hover:text-primary-600 transition-colors duration-200"
+                {...((item as any).external && { target: '_blank', rel: 'noopener noreferrer' })}
               >
                 {item.label}
               </a>
@@ -126,6 +128,7 @@ export default function Header({ className = '' }: HeaderProps) {
                   href={item.href}
                   className="text-gray-600 dark:text-gray-300 hover:text-primary-600 transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
+                  {...((item as any).external && { target: '_blank', rel: 'noopener noreferrer' })}
                 >
                   {item.label}
                 </a>

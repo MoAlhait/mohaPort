@@ -36,6 +36,24 @@ export default function Home() {
 
   return (
     <>
+      {/* Header Navigation */}
+      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-700">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <a 
+            href="https://mohammad-alhait.com" 
+            className="text-lg font-semibold text-gray-800 dark:text-white hover:text-pink-500 transition-colors"
+          >
+            ← Back to Portfolio
+          </a>
+          <h1 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600">
+            Mohammad Alhait - Cognitive Experiments
+          </h1>
+        </div>
+      </header>
+
+      {/* Add padding to account for fixed header */}
+      <div className="pt-20"></div>
+
       {/* Animated Background Particles */}
       <div className="background-particles">
         {[...Array(20)].map((_, i) => (
