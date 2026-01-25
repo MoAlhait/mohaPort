@@ -3,6 +3,8 @@ export interface PortfolioData {
     name: string;
     title: string;
     email: string;
+    phone?: string;
+    address?: string;
     location: string;
     graduationYear: string;
     about: string;
@@ -42,11 +44,13 @@ export interface PortfolioData {
 export const portfolioData: PortfolioData = {
   personal: {
     name: "Mohammad Alhait",
-    title: "Cognitive Science Student | Aspiring Product Manager",
+    title: "Junior Transfer Cognitive Science Major | UC Berkeley | Graduating 2028",
     email: "mo.alhait@gmail.com",
+    phone: "(669) 256-6809",
+    address: "10108 Bret Ave., Cupertino, CA 95014",
     location: "Cupertino, CA",
     graduationYear: "2028",
-    about: "I'm a passionate Cognitive Science student at UC Berkeley with a unique blend of research experience, community leadership, and creative skills. My journey began when my brother's brain injury inspired me to study cognitive rehabilitation, leading to experiments on memory and multitasking that showed 40% improvement in memory accuracy. I've combined my love for photography, community service, and cognitive research to create meaningful experiences that help people.",
+    about: "I'm a Cognitive Science major at UC Berkeley (graduating 2028) with hands-on experience in AI-powered product development, self-led cognition research, and full-stack web development. I've built rapid prototypes and full-featured apps using Cursor, run independent experiments on memory and stimuli—including finding that instrumental music improved recall accuracy by 26% vs. lyrical music, and building a React-based gamified memory app that gathered data from 50+ participants showing 40% faster completion with fewer errors. I combine research design, user validation, and product thinking with a strong foundation in communication, teamwork, and agile practices.",
     hobby: "Photography"
   },
   social: {
@@ -54,80 +58,114 @@ export const portfolioData: PortfolioData = {
   },
   skills: [
     {
+      name: "AI-Powered Development",
+      description: "Rapid prototyping with Cursor, AI tool integration, product workflow optimization, understanding user adoption of new technologies",
+      icon: "Code"
+    },
+    {
       name: "Cognitive Research",
-      description: "Memory studies, multitasking experiments, data analysis, experimental design, cognitive rehabilitation",
+      description: "Self-led experimental design, memory studies, data analysis, user validation, React-based research platforms, statistical analysis",
       icon: "BarChart3"
     },
     {
       name: "Product Strategy",
-      description: "User research, market analysis, feature prioritization, user experience design, community needs assessment",
+      description: "User feedback gathering, rapid prototyping, agile methodology, project coordination, translating research insights into product experiences",
       icon: "Target"
     },
     {
-      name: "Leadership & Community",
-      description: "Team coordination, event planning, fundraising, mentorship, community organizing",
-      icon: "Lightbulb"
-    },
-    {
-      name: "Technical Skills",
-      description: "React, JavaScript, web development, data visualization, experimental platforms",
+      name: "Full-Stack Development",
+      description: "React, Next.js, JavaScript, responsive web design, interactive project showcases, portfolio development",
       icon: "Database"
     },
     {
-      name: "Communication",
-      description: "Public speaking, debate, presentation skills, cross-cultural communication, teaching",
+      name: "Communication & Teamwork",
+      description: "Problem-solving, collaboration, organization, time management, client consultation, cross-functional coordination",
       icon: "MessageCircle"
     },
     {
       name: "Creative Expression",
-      description: "Photography, visual storytelling, design thinking, artistic problem-solving",
+      description: "Photography (TED events, sports, HS athletics), creative direction, brand consultation, logo design, visual storytelling",
       icon: "Palette"
     }
   ],
   projects: [
     {
-      title: "Cognitive Science Experiments",
-      description: "Designed experiments including a 2D maze game and verbal recall task to study memory and multitasking. Findings showed multitasking reduced memory accuracy by 40% and increased reaction time by 30%. The project became a tool to help my brother improve his focus and rebuild his memory after his brain injury.",
-      tech: ["Experimental Design", "Data Analysis", "Memory Research", "Cognitive Rehabilitation"],
+      title: "Self-Led Cognition Research",
+      description: "Designed and executed two independent research experiments exploring how stimuli impact memory. Experiment 1: studied the effect of auditory input on memory retention—instrumental music improved recall accuracy by 26% vs. lyrical music. Experiment 2: built a React-based interactive web app with gamified memory challenges, gathered user data from 50+ online participants, and found that engagement time directly correlated with task performance (≈40% faster completion, fewer errors). Combined research design, full-stack development, and real-world user validation.",
+      tech: ["React", "Research Design", "Data Analysis", "User Validation"],
       image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=300&fit=crop",
       link: "#",
+      github: "#"
+    },
+    {
+      title: "AI-Powered Tool Development (Cursor)",
+      description: "Built rapid prototypes and full-featured applications by leveraging AI capabilities in Cursor. Learned best practices for integrating AI tools into product workflows, understanding how users adopt new technologies, and identifying gaps where AI can enhance efficiency. Developed a deeper appreciation for AI as a product accelerator rather than a magic solution.",
+      tech: ["Cursor", "AI Integration", "Rapid Prototyping", "Product Workflows"],
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&h=300&fit=crop",
+      link: "#",
+      github: "#"
+    },
+    {
+      title: "Personal Website & Portfolio",
+      description: "Designed and built a custom portfolio (mohammad-alhait.com) using React to showcase projects and research in a polished, professional format. Implemented responsive design for optimal experience across devices and created interactive project showcases so visitors can engage with work samples directly. Demonstrates full-stack web development and product thinking around presenting technical work to different audiences.",
+      tech: ["React", "Next.js", "Responsive Design", "Product Thinking"],
+      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=500&h=300&fit=crop",
+      link: "https://mohammad-alhait.com",
       github: "#"
     }
   ],
   experience: [
     {
       title: "Barista Contractor",
-      company: "Fez Coffee Co.",
-      duration: "Apr 2024 - Present",
+      company: "Fez Coffee Roasters",
+      duration: "Aug 10, 2024 – Jan 16, 2026",
       description: [
-        "Crafted a variety of espresso-based beverages for high-end events like weddings and corporate gatherings",
-        "Assisted in setting up and managing mobile coffee carts at special events",
-        "Honed skills in customer service, time management, and adaptability in fast-paced environments",
-        "Specialized in latte art and maintaining quality standards under pressure"
+        "Supported high-volume event service (weddings, corporate); setup and breakdown for mobile coffee cart",
+        "Produced espresso drinks quickly and consistently in fast-paced environments; maintained quality under pressure"
       ]
     },
     {
-      title: "Bobarista",
-      company: "Cafe LaTTea",
-      duration: "Nov 2023 - Present",
+      title: "Bobarista / Barista",
+      company: "Cafe Lattea",
+      duration: "Nov 12, 2023 – Aug 2025",
       description: [
-        "Crafted high-quality boba tea and lattes with stunning latte art designs",
-        "Maintained a clean, welcoming environment while managing orders efficiently",
-        "Served in a fast-paced environment, ensuring customer satisfaction",
-        "Specialized in intricate latte art and customization to meet customer preferences"
+        "Delivered fast, accurate customer service in a high-traffic café; resolved issues on the fly",
+        "Improved team coverage by picking up shifts and supporting open/close operations as needed"
       ]
     },
     {
-      title: "Individual Academic Tutor",
+      title: "Barista",
+      company: "Peet's Coffee",
+      duration: "May 25, 2023 – Jan 14, 2024",
+      description: [
+        "Served thousands of customers daily while maintaining speed, accuracy, and customer experience",
+        "Led bar during rush periods; handled opening/closing and store operations"
+      ]
+    },
+    {
+      title: "Photographer",
       company: "Freelance",
-      duration: "2022 - Present",
+      duration: "Ongoing",
       description: [
-        "Provided one-on-one tutoring in science and English, driven by a desire to help peers succeed",
-        "Tailored lessons to each student's learning style and pace",
-        "Created personalized study plans to improve grades and build confidence",
-        "Fostered academic growth and problem-solving skills while honing teaching abilities"
+        "Shot live event content (TED) and sports photography; official photographer for HS athletics",
+        "Covered Senior Night event photography for families; delivered polished photo sets"
       ]
     }
   ],
-  activities: []
-}; 
+  activities: [
+    {
+      title: "Volunteer",
+      organization: "Feed The Hungry",
+      duration: "Ongoing",
+      description: "Packaged and distributed meals to unhoused community members during weekend service events.",
+      type: "CommunityService"
+    },
+    {
+      title: "Member",
+      organization: "Boy Scouts of America",
+      duration: "8 years",
+      description: "Volunteered with my Boy Scout troop to help the community—picking up trash in parks, preparing food for those in need, and more.",
+      type: "CommunityService"
+    }
+  ]
+};

@@ -8,6 +8,8 @@ import {
   Twitter, 
   Mail, 
   Download,
+  Phone,
+  MapPin,
   Code,
   Palette,
   Database,
@@ -491,9 +493,25 @@ export default function Home() {
           >
             <motion.div className="card-accent text-center" variants={cardVariants} whileHover={{ scale: 1.04, boxShadow: '0 0 24px #10B981' }}>
               <motion.h3 className="text-2xl font-semibold mb-4" variants={cardVariants}>Let's Start a Conversation</motion.h3>
-              <motion.p className="text-gray-600 dark:text-gray-300 mb-8" variants={cardVariants}>
+              <motion.p className="text-gray-600 dark:text-gray-300 mb-6" variants={cardVariants}>
                 Whether you have a project in mind or just want to chat about cognitive science and community impact, I'd love to hear from you.
               </motion.p>
+              {(portfolioData.personal.phone || portfolioData.personal.address) && (
+                <motion.div className="flex flex-wrap justify-center gap-4 mb-6 text-sm text-gray-600 dark:text-gray-300" variants={cardVariants}>
+                  {portfolioData.personal.phone && (
+                    <a href={`tel:${portfolioData.personal.phone.replace(/\D/g, '')}`} className="flex items-center gap-2 hover:text-accent-600 dark:hover:text-accent-400 transition-colors">
+                      <Phone size={16} />
+                      {portfolioData.personal.phone}
+                    </a>
+                  )}
+                  {portfolioData.personal.address && (
+                    <span className="flex items-center gap-2">
+                      <MapPin size={16} />
+                      {portfolioData.personal.address}
+                    </span>
+                  )}
+                </motion.div>
+              )}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href={`mailto:${portfolioData.personal.email}`} className="btn-accent flex items-center justify-center gap-2">
                   <Mail size={20} />
