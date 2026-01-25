@@ -94,8 +94,8 @@ export const portfolioData: PortfolioData = {
       description: "Designed and executed two independent research experiments exploring how stimuli impact memory. Experiment 1: studied the effect of auditory input on memory retention—instrumental music improved recall accuracy by 26% vs. lyrical music. Experiment 2: built a React-based interactive web app with gamified memory challenges, gathered user data from 50+ online participants, and found that engagement time directly correlated with task performance (≈40% faster completion, fewer errors). Combined research design, full-stack development, and real-world user validation.",
       tech: ["React", "Research Design", "Data Analysis", "User Validation"],
       image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=300&fit=crop",
-      link: "#",
-      github: "#"
+      link: "https://experiments.mohammad-alhait.com",
+      github: "https://github.com/MoAlhait/cognitive-experiments"
     },
     {
       title: "AI-Powered Tool Development (Cursor)",

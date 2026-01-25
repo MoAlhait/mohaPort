@@ -35,157 +35,154 @@ export default function Home() {
   ]
 
   return (
-    <>
-      {/* Animated Background Particles */}
-      <div className="background-particles">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="particle"
-            style={{
-              width: Math.random() * 4 + 2 + 'px',
-              height: Math.random() * 4 + 2 + 'px',
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
-              animationDelay: Math.random() * 6 + 's',
-              animationDuration: (Math.random() * 4 + 4) + 's'
-            }}
-          />
-        ))}
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-[#E6FFE7] to-[#C9FFD1]">
+      {/* Modern Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100 shadow-sm">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <a 
+            href="https://mohammad-alhait.com" 
+            className="flex items-center gap-1 px-4 py-2 rounded-full bg-gray-50 hover:bg-gray-100 transition-all group"
+          >
+            <svg className="w-2 h-2 text-gray-600 group-hover:text-gray-900 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span className="text-sm font-medium text-gray-600 group-hover:text-gray-900 transition-colors">Portfolio</span>
+          </a>
+          <div className="text-sm font-semibold text-gray-800">Cognitive Experiments</div>
+        </div>
+      </header>
 
-      <div className="experiment-container">
-        {!currentExperiment ? (
-          <>
-            {/* Panel 1: Hero + Stats */}
-            <div className="experiment-card">
-              <div className="text-center mb-8">
-                <h1 className="hero-title">
+      {/* Main Content */}
+      <main className="pt-24 pb-12 px-6">
+        <div className="container mx-auto max-w-7xl">
+          {!currentExperiment ? (
+            <>
+              {/* Hero Section */}
+              <div className="text-center mb-12">
+                <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
                   Cognitive Science Experiments
                 </h1>
-                <p className="hero-subtitle">
+                <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
                   Interactive psychology experiments designed for college students (18-22). 
                   Explore classic cognitive psychology findings through hands-on participation.
                 </p>
               </div>
-              
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="stat-card">
-                  <div className="stat-value">3</div>
-                  <div className="stat-label">Interactive Experiments</div>
+
+              {/* Stats Cards */}
+              <div className="grid md:grid-cols-3 gap-6 mb-16">
+                <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                  <div className="text-5xl font-bold bg-gradient-to-r from-[#B5FFC1] to-[#8AE699] bg-clip-text text-transparent mb-2">3</div>
+                  <div className="text-sm font-semibold text-gray-700">Interactive Experiments</div>
                 </div>
-                <div className="stat-card">
-                  <div className="stat-value">60+</div>
-                  <div className="stat-label">Data Points Collected</div>
+                <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                  <div className="text-5xl font-bold bg-gradient-to-r from-[#B5FFC1] to-[#8AE699] bg-clip-text text-transparent mb-2">60+</div>
+                  <div className="text-sm font-semibold text-gray-700">Data Points Collected</div>
                 </div>
-                <div className="stat-card">
-                  <div className="stat-value">100%</div>
-                  <div className="stat-label">Educational Value</div>
+                <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                  <div className="text-5xl font-bold bg-gradient-to-r from-[#B5FFC1] to-[#8AE699] bg-clip-text text-transparent mb-2">100%</div>
+                  <div className="text-sm font-semibold text-gray-700">Educational Value</div>
                 </div>
               </div>
-            </div>
 
-            {/* Panel 2: Experiment Cards */}
-            <div className="experiment-card">
-              <h3 className="text-4xl font-bold mb-10 text-center" style={{ color: 'var(--text-primary)' }}>Choose Your Experiment</h3>
-              <div className="grid md:grid-cols-3 gap-8">
-                {experiments.map((experiment, index) => (
-                  <div 
-                    key={experiment.id} 
-                    className="p-8 backdrop-blur-sm hover:scale-105 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-2xl flex flex-col"
-                    style={{
-                      animationDelay: `${index * 0.2}s`,
-                      animation: 'fadeInUp 0.8s ease forwards',
-                      background: 'rgba(249, 168, 212, 0.95)',
-                      borderRadius: '24px',
-                      boxShadow: '0 10px 30px rgba(236, 72, 153, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05)'
-                    }}
-                    onClick={() => setCurrentExperiment(experiment.id)}
-                  >
-                    <div className="mb-6">
-                      <div className="text-5xl font-extrabold text-center my-2" style={{ color: 'black', textShadow: '2px 4px 24px rgba(0,0,0,0.98), 0 2px 8px rgba(0,0,0,0.55)' }}>
-                        {experiment.title}
+              {/* Experiment Cards */}
+              <div className="mb-16">
+                <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Choose Your Experiment</h2>
+                <div className="grid md:grid-cols-3 gap-8">
+                  {experiments.map((experiment, index) => (
+                    <div 
+                      key={experiment.id} 
+                      className="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-gray-100 hover:border-[#B5FFC1] hover:-translate-y-1"
+                      style={{
+                        animationDelay: `${index * 0.15}s`,
+                        animation: 'fadeInUp 0.6s ease forwards'
+                      }}
+                      onClick={() => setCurrentExperiment(experiment.id)}
+                    >
+                      <div className="mb-6">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-[#5FAF6C] transition-colors">
+                          {experiment.title}
+                        </h3>
+                        <p className="text-gray-600 leading-relaxed">
+                          {experiment.description}
+                        </p>
                       </div>
-                      <div className="text-2xl font-extrabold text-center my-2" style={{ color: 'black', textShadow: '1.8px 3.5px 14px rgba(0,0,0,0.85), 0 1.5px 6px rgba(0,0,0,0.33)' }}>
-                        {experiment.description}
-                      </div>
-                    </div>
-                    <div className="mt-auto pt-4">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           setCurrentExperiment(experiment.id);
                         }}
-                        className="w-full font-extrabold py-6 px-8 text-white text-3xl text-center transition-all duration-300 hover:opacity-90"
-                        style={{ 
-                          background: 'rgba(255, 255, 255, 0.25)',
-                          backdropFilter: 'blur(10px)',
-                          borderRadius: '16px',
-                          border: 'none',
-                          textShadow: '2px 4px 18px rgba(0,0,0,0.38), 0 1.5px 8px rgba(0,0,0,0.44)'
-                        }}
+                        className="w-full py-3 px-6 bg-gradient-to-r from-[#B5FFC1] to-[#8AE699] text-white font-semibold rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
                       >
-                        Start
+                        Start Experiment →
                       </button>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Panel 3: Why These Experiments Matter */}
-            <div className="experiment-card">
-              <h3 className="text-4xl font-bold mb-8 text-center" style={{ color: 'var(--text-primary)' }}>Why These Experiments Matter</h3>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="p-8 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300"
-                  style={{ background: 'rgba(249, 168, 212, 0.95)', borderRadius: '24px' }}>
-                  <h4 className="text-2xl font-bold mb-4 text-white">Scientific Accuracy</h4>
-                  <p className="leading-relaxed text-white/90" style={{ fontWeight: '400' }}>
-                    Based on peer-reviewed research and validated methodologies used in 
-                    leading cognitive psychology laboratories worldwide.
-                  </p>
-                </div>
-                <div className="p-8 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300"
-                  style={{ background: 'rgba(249, 168, 212, 0.95)', borderRadius: '24px' }}>
-                  <h4 className="text-2xl font-bold mb-4 text-white">Data-Driven Insights</h4>
-                  <p className="leading-relaxed text-white/90" style={{ fontWeight: '400' }}>
-                    Real-time performance metrics and comprehensive statistical analysis 
-                    help you understand your cognitive patterns and abilities.
-                  </p>
+              {/* Info Section */}
+              <div className="bg-white rounded-3xl p-10 shadow-lg border border-gray-100">
+                <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Why These Experiments Matter</h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="p-6 rounded-2xl bg-gradient-to-br from-[#E6FFE7] to-white">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#B5FFC1] to-[#8AE699] flex items-center justify-center">
+                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">Scientific Accuracy</h3>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed">
+                      Based on peer-reviewed research and validated methodologies used in 
+                      leading cognitive psychology laboratories worldwide.
+                    </p>
+                  </div>
+                  <div className="p-6 rounded-2xl bg-gradient-to-br from-[#E6FFE7] to-white">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-[#B5FFC1] to-[#8AE699] flex items-center justify-center">
+                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">Data-Driven Insights</h3>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed">
+                      Real-time performance metrics and comprehensive statistical analysis 
+                      help you understand your cognitive patterns and abilities.
+                    </p>
+                  </div>
                 </div>
               </div>
+            </>
+          ) : (
+            <div className="bg-white rounded-3xl shadow-xl p-10 border border-gray-100">
+              <button
+                onClick={() => setCurrentExperiment(null)}
+                className="mb-8 flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-[#E6FFE7] to-[#C9FFD1] text-gray-700 font-semibold hover:shadow-lg transition-all duration-300 group"
+              >
+                <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span>Back to Experiments</span>
+              </button>
+              
+              {experiments.find(exp => exp.id === currentExperiment)?.component && 
+                (() => {
+                  const ExperimentComponent = experiments.find(exp => exp.id === currentExperiment)!.component
+                  return <ExperimentComponent />
+                })()
+              }
             </div>
-          </>
-        ) : (
-          <div className="experiment-card">
-            <button
-              onClick={() => setCurrentExperiment(null)}
-                    className="mb-8 text-lg font-semibold px-8 py-3 text-white transition-all duration-300 hover:opacity-90"
-                    style={{ 
-                      background: 'rgba(255, 255, 255, 0.25)',
-                      backdropFilter: 'blur(10px)',
-                      borderRadius: '16px',
-                      border: 'none'
-                    }}
-                  >
-                    ← Back to Experiments
-                  </button>
-            
-            {experiments.find(exp => exp.id === currentExperiment)?.component && 
-              (() => {
-                const ExperimentComponent = experiments.find(exp => exp.id === currentExperiment)!.component
-                return <ExperimentComponent />
-              })()
-            }
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      </main>
 
       <style jsx>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
           }
           to {
             opacity: 1;
@@ -193,6 +190,6 @@ export default function Home() {
           }
         }
       `}</style>
-    </>
+    </div>
   )
 }
