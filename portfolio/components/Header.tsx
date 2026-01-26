@@ -62,7 +62,7 @@ export default function Header({ className = '' }: HeaderProps) {
           {/* Logo */}
           <motion.h1 
             className="text-2xl font-bold text-gradient"
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 1, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >

@@ -59,7 +59,16 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent;
+    color: #0284c7; /* primary-600 fallback when gradient text unsupported */
+  }
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    .text-gradient {
+      @apply bg-gradient-to-r from-primary-600 to-primary-400;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
   }
   
   .bg-gradient {
