@@ -8,16 +8,38 @@ interface HeaderProps {
   className?: string
 }
 
-// Static Name Component
+// Animated Name — continuous bounce wave, 3s pause between cycles
 const WaveText = ({ text }: { text: string }) => {
+  const dur = 0.6
+  const delayStep = 0.1
+  const pause = 3
   return (
-    <div className="flex">
-      {text.split('').map((char, index) => (
-        <span key={index} className="inline-block">
+    <>
+      {text.split('').map((char, i) => (
+        <motion.span
+          key={i}
+          className="inline-block"
+          animate={{ y: [0, -12, 0] }}
+          transition={{
+            duration: dur,
+            delay: i * delayStep,
+            ease: 'easeOut',
+            repeat: Infinity,
+            repeatDelay: pause,
+          }}
+          style={{
+            willChange: 'transform',
+            color: '#0284c7',
+            background: 'linear-gradient(to right, #0284c7, #38bdf8)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}
+        >
           {char === ' ' ? '\u00A0' : char}
-        </span>
+        </motion.span>
       ))}
-    </div>
+    </>
   )
 }
 

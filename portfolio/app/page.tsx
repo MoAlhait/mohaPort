@@ -76,6 +76,7 @@ const cardVariants = {
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false)
+  const [aboutHover, setAboutHover] = useState(false)
 
   useEffect(() => {
     setIsLoaded(true)
@@ -150,15 +151,11 @@ export default function Home() {
         className="section-padding bg-gradient-to-br from-white to-accent-50/50 dark:from-dark-800 dark:to-accent-900/10 bg-about-section"
       >
         <div className="container-custom">
-          {/* About section hover state */}
-          {(() => {
-            const [aboutHover, setAboutHover] = useState(false);
-            return (
-              <div
-                className="flex flex-col md:flex-row gap-12 items-center md:items-start"
-                onMouseEnter={() => setAboutHover(true)}
-                onMouseLeave={() => setAboutHover(false)}
-              >
+          <div
+            className="flex flex-col md:flex-row gap-12 items-center md:items-start"
+            onMouseEnter={() => setAboutHover(true)}
+            onMouseLeave={() => setAboutHover(false)}
+          >
                 <motion.div
                   className="about-text flex-1"
                   initial="hidden"
@@ -229,9 +226,7 @@ export default function Home() {
                     </motion.div>
                   </motion.div>
                 </div>
-              </div>
-            );
-          })()}
+          </div>
         </div>
       </section>
 
