@@ -50,7 +50,7 @@ export const portfolioData: PortfolioData = {
     address: "10108 Bret Ave., Cupertino, CA 95014",
     location: "Cupertino, CA",
     graduationYear: "2028",
-    about: "I'm a Cognitive Science major at UC Berkeley (graduating 2028) with hands-on experience in AI-powered product development, self-led cognition research, and full-stack web development. I've built rapid prototypes and full-featured apps using Cursor, run independent experiments on memory and stimuli—including finding that instrumental music improved recall accuracy by 26% vs. lyrical music, and building a React-based gamified memory app that gathered data from 50+ participants showing 40% faster completion with fewer errors. I combine research design, user validation, and product thinking with a strong foundation in communication, teamwork, and agile practices.",
+    about: "I'm a Cognitive Science major at UC Berkeley, passionate about understanding human behavior and building products that make a difference. I combine research, development, and design to create meaningful experiences.",
     hobby: "Photography"
   },
   social: {

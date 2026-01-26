@@ -152,12 +152,12 @@ export default function Home() {
       >
         <div className="container-custom">
           <div
-            className="flex flex-col md:flex-row gap-12 items-center md:items-start"
+            className="flex flex-col md:flex-row gap-8 md:gap-12 items-center"
             onMouseEnter={() => setAboutHover(true)}
             onMouseLeave={() => setAboutHover(false)}
           >
                 <motion.div
-                  className="about-text flex-1"
+                  className="about-text flex-1 text-center md:text-left"
                   initial="hidden"
                   animate="visible"
                   variants={{
@@ -166,38 +166,29 @@ export default function Home() {
                   }}
                 >
                   <motion.h2
-                    className="text-4xl font-bold mb-6"
+                    className="text-3xl md:text-4xl font-bold mb-4"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                   >About Me</motion.h2>
                   <motion.p
-                    className="text-lg text-gray-600 dark:text-gray-300 mb-6"
+                    className="text-base md:text-lg text-gray-600 dark:text-gray-300 mb-6 max-w-2xl md:max-w-none"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.2 }}
                   >{portfolioData.personal.about}</motion.p>
-                  <motion.p
-                    className="text-lg text-gray-600 dark:text-gray-300 mb-6"
+                  <motion.div
+                    className="flex gap-4 justify-center md:justify-start"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.4 }}
-                  >
-                    When I'm not studying or working, you can find me pursuing my passion for <span className="text-accent-600 dark:text-accent-400 font-medium">{portfolioData.personal.hobby.toLowerCase()}</span>,
-                    exploring new technologies, or contributing to my community through volunteer work.
-                  </motion.p>
-                  <motion.div
-                    className="flex gap-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.7, delay: 0.6 }}
                   >
                     <a href={portfolioData.social.linkedin} className="text-gray-600 dark:text-gray-300 hover:text-accent-600 dark:hover:text-accent-400 transition-colors" target="_blank" rel="noopener noreferrer">
                       <Linkedin size={24} />
                     </a>
                   </motion.div>
                 </motion.div>
-                <div className="flex-1 flex justify-center md:justify-end w-full">
+                <div className="flex-1 flex justify-center w-full md:w-auto">
                   <motion.div
                     className="relative"
                     initial={{ scale: 0.7, rotate: -10, opacity: 0 }}
@@ -205,19 +196,19 @@ export default function Home() {
                     transition={{ type: 'spring', stiffness: 80, damping: 12, duration: 1 }}
                   >
                     <motion.div
-                      className="w-[27.5rem] h-[27.5rem] rounded-full bg-[#77F2A1] flex items-center justify-center"
+                      className="w-[20rem] h-[20rem] md:w-[22rem] md:h-[22rem] rounded-full bg-[#77F2A1] flex items-center justify-center"
                       style={{ 
                         boxShadow: aboutHover ? '0 0 48px 16px #77F2A1, 0 0 80px 24px #182534' : '0 0 8px 2px #77F2A1, 0 0 20px 4px #182534',
                         transition: 'box-shadow 0.5s cubic-bezier(0.4,0,0.2,1)'
                       }}
                     >
-                      <div className="w-[26.5rem] h-[26.5rem] rounded-full bg-[#182534] p-1 flex items-center justify-center">
+                      <div className="w-[19rem] h-[19rem] md:w-[21rem] md:h-[21rem] rounded-full bg-[#182534] p-1 flex items-center justify-center">
                         <motion.img
                           src="/profile.jpg"
                           alt="Mohammad Alhait profile photo"
-                          width={400}
-                          height={400}
-                          className="object-cover w-96 h-96 rounded-full"
+                          width={300}
+                          height={300}
+                          className="object-cover w-[18.5rem] h-[18.5rem] md:w-[20.5rem] md:h-[20.5rem] rounded-full"
                           initial={{ scale: 0.8, opacity: 0 }}
                           animate={{ scale: 1, opacity: 1 }}
                           transition={{ delay: 0.5, duration: 0.8, type: 'spring', stiffness: 100 }}
