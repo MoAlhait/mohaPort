@@ -55,15 +55,31 @@
   .bg-accent-subtle {
     @apply bg-accent-50 dark:bg-accent-900/10;
   }
+  
+  /* Explicit background utilities to prevent purging */
+  .bg-about-section {
+    background: linear-gradient(to bottom right, #ffffff, rgba(240, 253, 244, 0.5));
+  }
+  
+  .dark .bg-about-section {
+    background: linear-gradient(to bottom right, #1e293b, rgba(20, 83, 45, 0.1));
+  }
 }
 
 @layer utilities {
   .text-gradient {
-    color: #0284c7; /* primary-600 fallback when gradient text unsupported */
+    /* Fallback solid color - always visible */
+    color: #0284c7 !important; /* primary-600 */
+    background: linear-gradient(to right, #0284c7, #38bdf8); /* primary-600 to primary-400 */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
+  
+  /* Enhanced gradient for supported browsers */
   @supports (background-clip: text) or (-webkit-background-clip: text) {
     .text-gradient {
-      @apply bg-gradient-to-r from-primary-600 to-primary-400;
+      background: linear-gradient(to right, #0284c7, #38bdf8);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;

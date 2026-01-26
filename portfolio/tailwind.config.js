@@ -5,6 +5,26 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    'text-gradient',
+    'bg-gradient-to-br',
+    'from-white',
+    'to-accent-50',
+    'accent-50',
+    'accent-50/50',
+    'accent-50/30',
+    'from-primary-600',
+    'to-primary-400',
+    'bg-accent-subtle',
+    'bg-gradient-accent',
+    'bg-about-section',
+    {
+      pattern: /^(bg|text|border)-(primary|accent|dark)-(50|100|200|300|400|500|600|700|800|900)$/,
+    },
+    {
+      pattern: /^(from|to|via)-(primary|accent|dark)-(50|100|200|300|400|500|600|700|800|900)$/,
+    },
+  ],
   theme: {
     extend: {
       colors: {

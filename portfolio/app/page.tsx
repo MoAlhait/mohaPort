@@ -45,7 +45,12 @@ const BounceWaveName = ({ text }: { text: string }) => {
             ease: "easeOut"
           }}
           style={{
-            willChange: 'transform'
+            willChange: 'transform',
+            color: '#0284c7',
+            background: 'linear-gradient(to right, #0284c7, #38bdf8)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
           }}
         >
           {char === ' ' ? '\u00A0' : char}
@@ -140,7 +145,10 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="section-padding bg-gradient-to-br from-white to-accent-50/50 dark:from-dark-800 dark:to-accent-900/10">
+      <section 
+        id="about" 
+        className="section-padding bg-gradient-to-br from-white to-accent-50/50 dark:from-dark-800 dark:to-accent-900/10 bg-about-section"
+      >
         <div className="container-custom">
           {/* About section hover state */}
           {(() => {
