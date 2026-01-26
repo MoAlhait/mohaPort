@@ -104,12 +104,33 @@ export default function Header({ className = '' }: HeaderProps) {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-gray-600 dark:text-gray-300 hover:text-primary-600 transition-colors duration-200"
+                className={`transition-colors duration-200 ${
+                  item.label === 'Experiments'
+                    ? 'text-[#ec4899] hover:text-[#db2777] font-bold'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-primary-600'
+                }`}
                 {...('external' in item && item.external
                   ? { target: '_blank', rel: 'noopener noreferrer' }
                   : {})}
               >
-                {item.label}
+                {item.label === 'Experiments' ? (
+                  <motion.span
+                    animate={{ scale: [1, 1.08, 1] }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                    style={{
+                      filter: 'drop-shadow(0 0 8px rgba(236,72,153,0.7))',
+                    }}
+                    className="inline-block"
+                  >
+                    {item.label}
+                  </motion.span>
+                ) : (
+                  item.label
+                )}
               </a>
             ))}
             
@@ -157,13 +178,34 @@ export default function Header({ className = '' }: HeaderProps) {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="text-gray-600 dark:text-gray-300 hover:text-primary-600 transition-colors duration-200"
+                  className={`transition-colors duration-200 ${
+                    item.label === 'Experiments'
+                      ? 'text-[#ec4899] hover:text-[#db2777] font-bold'
+                      : 'text-gray-600 dark:text-gray-300 hover:text-primary-600'
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                   {...('external' in item && item.external
                     ? { target: '_blank', rel: 'noopener noreferrer' }
                     : {})}
                 >
-                  {item.label}
+                  {item.label === 'Experiments' ? (
+                    <motion.span
+                      animate={{ scale: [1, 1.08, 1] }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
+                      style={{
+                        filter: 'drop-shadow(0 0 8px rgba(236,72,153,0.7))',
+                      }}
+                      className="inline-block"
+                    >
+                      {item.label}
+                    </motion.span>
+                  ) : (
+                    item.label
+                  )}
                 </a>
               ))}
             </div>
