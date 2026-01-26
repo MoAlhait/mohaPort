@@ -12,8 +12,13 @@ export const metadata: Metadata = {
   authors: [{ name: 'Mohammad Alhait' }],
   creator: 'Mohammad Alhait',
   icons: {
-    icon: '/favicon.svg',
-    apple: '/favicon.svg',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.svg',
   },
   openGraph: {
     title: 'Mohammad Alhait - Cognitive Science | UC Berkeley 2028',
