@@ -12,12 +12,8 @@ export const metadata: Metadata = {
   authors: [{ name: 'Mohammad Alhait' }],
   creator: 'Mohammad Alhait',
   icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
-    apple: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
     shortcut: '/favicon.svg',
   },
   openGraph: {

@@ -8,12 +8,8 @@ export const metadata: Metadata = {
   title: 'Cognitive Science Experiments',
   description: 'Interactive cognitive psychology experiments for college students',
   icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
-    apple: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
     shortcut: '/favicon.svg',
   },
 }
