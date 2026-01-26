@@ -195,7 +195,7 @@ body {
 
 /* Back Button */
 .back-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   background: var(--glass-bg);
@@ -210,6 +210,7 @@ body {
   cursor: pointer;
   box-shadow: var(--shadow-soft);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: auto;
 }
 
 .back-button:hover {
