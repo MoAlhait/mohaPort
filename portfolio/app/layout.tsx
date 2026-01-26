@@ -11,6 +11,10 @@ export const metadata: Metadata = {
   keywords: ['cognitive science', 'UC Berkeley', 'Cursor', 'AI tools', 'cognition research', 'React', 'mohammad-alhait'],
   authors: [{ name: 'Mohammad Alhait' }],
   creator: 'Mohammad Alhait',
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
   openGraph: {
     title: 'Mohammad Alhait - Cognitive Science | UC Berkeley 2028',
     description: 'Cognitive Science at UC Berkeley. AI-powered development, cognition research, React. mohammad-alhait.com',
