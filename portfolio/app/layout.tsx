@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Mohammad Alhait - Cognitive Science | UC Berkeley 2028',
-  description: 'Junior Transfer Cognitive Science major at UC Berkeley (graduating 2028). AI-powered tool development, self-led cognition research, React portfolios. Cupertino, CA.',
+  description: 'Cognitive Science major at UC Berkeley (graduating 2028). AI-powered tool development, self-led cognition research, React portfolios. Cupertino, CA.',
   keywords: ['cognitive science', 'UC Berkeley', 'Cursor', 'AI tools', 'cognition research', 'React', 'mohammad-alhait'],
   authors: [{ name: 'Mohammad Alhait' }],
   creator: 'Mohammad Alhait',

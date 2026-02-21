@@ -44,7 +44,7 @@ export interface PortfolioData {
 export const portfolioData: PortfolioData = {
   personal: {
     name: "Mohammad Alhait",
-    title: "Junior Transfer Cognitive Science Major | UC Berkeley | Graduating 2028",
+    title: "Cognitive Science Major | UC Berkeley | Graduating 2028",
     email: "mo.alhait@gmail.com",
     phone: "(669) 256-6809",
     address: "10108 Bret Ave., Cupertino, CA 95014",
