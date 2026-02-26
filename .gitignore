@@ -21,6 +21,9 @@ out/
 dist/
 **/dist/
 
+# maps is its own git repo
+data c88c/maps/
+
 # misc
 .DS_Store
 *.pem
